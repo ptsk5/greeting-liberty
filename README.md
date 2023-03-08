@@ -22,7 +22,7 @@ podman build --platform=linux/amd64 -t greeting-ol:latest -f Dockerfile-ol .
 podman build --platform=linux/amd64 -t greeting-wl:latest -f Dockerfile-wl .
 ```
 
-## Run an application image
+## Run a container
 
 ```bash
 # Open Liberty
