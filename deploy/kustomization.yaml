@@ -9,17 +9,16 @@ labels:
     app: greeting-cicd
 nameSuffix: -cicd
 patches:
-  - patch: |-
-      - op: replace
-        path: /spec/env/0/valueFrom/configMapKeyRef/name
-        value: greeting-cicd
-    target:
-      kind: WebSphereLibertyApplication
-  - patch: |-
-      - op: replace
-        path: /data/greetings
-        value: Hello from WebSphere Liberty managed by WebSphere Liberty Operator;Hello from CI/CD pipeline
-    target:
-      kind: ConfigMap
-patchesStrategicMerge:
-- applicationImage.Patch.yaml
+- path: applicationImage.Patch.yaml
+- patch: |-
+    - op: replace
+      path: /spec/env/0/valueFrom/configMapKeyRef/name
+      value: greeting-cicd
+  target:
+    kind: WebSphereLibertyApplication
+- patch: |-
+    - op: replace
+      path: /data/greetings
+      value: Hello from WebSphere Liberty managed by WebSphere Liberty Operator;Hello from CI/CD pipeline
+  target:
+    kind: ConfigMap
