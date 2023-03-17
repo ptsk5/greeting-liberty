@@ -11,6 +11,9 @@ patches:
       - op: replace
         path: /spec/applicationImage
         value: quay.io/client-engineering-cee/whe/greeting-wl:v1
+      - op: replace
+        path: /spec/env/0/valueFrom/configMapKeyRef/name
+        value: greeting-cicd
     target:
       kind: WebSphereLibertyApplication
   - patch: |-
