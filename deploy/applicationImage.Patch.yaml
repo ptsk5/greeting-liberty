@@ -1,0 +1,9 @@
+# The content of this file is created dynamically by the pipeline
+# ---------------------------------------------------------------
+#
+# apiVersion: liberty.websphere.ibm.com/v1
+# kind: WebSphereLibertyApplication
+# metadata:
+#   name: greeting
+# spec: 
+#   applicationImage: ''
