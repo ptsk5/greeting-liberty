@@ -3,8 +3,10 @@ kind: Kustomization
 resources:
 - greeting.ConfigMap.yaml
 - greeting.wlapp.yaml
-commonLabels:
-  app: greeting-cicd
+labels:
+- includeSelectors: true
+  pairs:
+    app: greeting-cicd
 nameSuffix: -cicd
 patches:
   - patch: |-
