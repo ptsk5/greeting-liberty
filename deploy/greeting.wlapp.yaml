@@ -1,0 +1,60 @@
+apiVersion: liberty.websphere.ibm.com/v1
+kind: WebSphereLibertyApplication
+metadata:
+  name: greeting
+  labels:
+    app: greeting
+spec:
+  networkPolicy:
+    disable: true
+  license:
+    accept: true
+    edition: IBM WebSphere Application Server Liberty Core
+    productEntitlementSource: IBM Cloud Pak for Applications
+  probes:
+    liveness:
+      httpGet:
+        path: /api/greetings
+        port: 9080
+        schema: HTTP
+    readiness:
+      httpGet:
+        path: /api/greetings
+        port: 9080
+        schema: HTTP
+    startup:
+      httpGet:
+        path: /api/greetings
+        port: 9080
+        schema: HTTP
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 128Mi
+  route:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  env:
+    - valueFrom:
+        configMapKeyRef:
+          key: greetings
+          name: greeting
+          optional: false
+      name: GREETINGS
+    # - name: WLP_LOGGING_CONSOLE_FORMAT
+    #   value: DEV / JSON / SIMPLE / TBASIC
+  service:
+    port: 9080
+  # autoscaling:
+  #   maxReplicas: 5
+  #   minReplicas: 1
+  #   targetCPUUtilizationPercentage: 60
+  applicationImage: ''
+  manageTLS: false
+  pullPolicy: Always
+  createKnativeService: false
+  expose: true
+  replicas: 1

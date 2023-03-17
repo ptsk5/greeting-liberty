@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- greeting.ConfigMap.yaml
+- greeting.wlapp.yaml
+commonLabels:
+  app: greeting-cicd
+nameSuffix: -cicd
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/applicationImage
+        value: quay.io/client-engineering-cee/whe/greeting-wl:v1
+    target:
+      kind: WebSphereLibertyApplication
+  - patch: |-
+      - op: replace
+        path: /data/greetings
+        value: Hello from WebSphere Liberty managed by WebSphere Liberty Operator;Hello from CI/CD pipeline
+    target:
+      kind: ConfigMap
