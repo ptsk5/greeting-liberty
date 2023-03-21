@@ -3,5 +3,7 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: greeting
+  labels:
+    app: greeting
 data:
   greetings: Hello from Liberty
