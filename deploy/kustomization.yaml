@@ -3,22 +3,22 @@ kind: Kustomization
 resources:
 - greeting.ConfigMap.yaml
 - greeting.wlapp.yaml
-labels:
-- includeSelectors: true
-  pairs:
-    app: greeting-cicd
-nameSuffix: -cicd
+# labels:
+# - includeSelectors: true
+#   pairs:
+#     app: greeting-xyz
+# nameSuffix: -xyz
 patches:
 - path: applicationImage.Patch.yaml
-- patch: |-
-    - op: replace
-      path: /spec/env/0/valueFrom/configMapKeyRef/name
-      value: greeting-cicd
-  target:
-    kind: WebSphereLibertyApplication
+# - patch: |-
+#     - op: replace
+#       path: /spec/env/0/valueFrom/configMapKeyRef/name
+#       value: greeting-xyz
+#   target:
+#     kind: WebSphereLibertyApplication
 - patch: |-
     - op: replace
       path: /data/greetings
-      value: Hello from WebSphere Liberty managed by WebSphere Liberty Operator;Hello from CI/CD pipeline
+      value: Hello from WebSphere Liberty managed by WebSphere Liberty Operator;Hello from the pipeline
   target:
     kind: ConfigMap
