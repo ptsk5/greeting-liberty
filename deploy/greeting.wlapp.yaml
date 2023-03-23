@@ -16,17 +16,14 @@ spec:
       httpGet:
         path: /api/greetings
         port: 9080
-        schema: HTTP
     readiness:
       httpGet:
         path: /api/greetings
         port: 9080
-        schema: HTTP
     startup:
       httpGet:
         path: /api/greetings
         port: 9080
-        schema: HTTP
   resources:
     limits:
       cpu: 500m
